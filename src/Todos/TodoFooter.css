@@ -1,0 +1,32 @@
+.todoAppFooter {
+  color: #777;
+  padding: 10px 15px;
+  height: 20px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.todoAppFooter span {
+  cursor: default;
+}
+
+.todoClearCompleted {
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  right: 11px;
+  bottom: 7px;
+  z-index: 1;
+  border: none;
+  color: #4d4d4d;
+  background: #d6d6d6;
+  font-weight: 600;
+  padding: 3px 12px;
+  transition: all 0.3s ease-in;
+  letter-spacing: 1px;
+}
+
+.todoClearCompleted:hover {
+  transform: scale(1.06);
+  color: #d6d6d6;
+  background-color: #4d4d4d;
+}
