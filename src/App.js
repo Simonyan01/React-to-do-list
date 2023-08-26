@@ -8,7 +8,7 @@ import "./App.css";
 export const TodoApp = () => {
   const [todos, dispatch] = useReducer(reducer, data);
 
-  const addText = (text) => {
+  const addContext = (text) => {
     dispatch({
       type: "add",
       payload: {
@@ -17,7 +17,7 @@ export const TodoApp = () => {
     });
   };
 
-  const deleteText = (todo) => {
+  const deleteContext = (todo) => {
     dispatch({
       type: "delete",
       payload: {
@@ -26,7 +26,7 @@ export const TodoApp = () => {
     });
   };
 
-  const changeText = (newTodo) => {
+  const changeContext = (newTodo) => {
     dispatch({
       type: "update",
       payload: {
@@ -44,8 +44,8 @@ export const TodoApp = () => {
   return (
     <div className="App">
       <h1 className="todoTitle">Todos</h1>
-      <TodoForm onAdd={addText} />
-      <TodoList todos={todos} onDelete={deleteText} onChange={changeText} />
+      <TodoForm onAdd={addContext} />
+      <TodoList todos={todos} onDelete={deleteContext} onChange={changeContext} />
       <TodoFooter todos={todos} onClearCompleted={clearCompleted} />
     </div>
   );
