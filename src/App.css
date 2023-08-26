@@ -1,22 +1,36 @@
 * {
-  font-family: Raleway, cursive;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", cursive;
 }
 
 html {
   background: #e0c4c4;
 }
 
+body {
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1rem;
+  background: #f5f5f5;
+  color: #4d4d4d;
+  min-width: 230px;
+  max-width: 450px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
 .App {
   background: #fff;
-  margin: 170px 0 0 0;
+  margin: 15rem 0 0 0;
   position: relative;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2), 0 25px 60px 0 rgba(0, 0, 0, 0.1);
 }
 
-.todoAppTitle {
+.todoTitle {
   letter-spacing: 1px;
-  position: absolute;
-  top: -170px;
+  position: fixed;
+  top: 10rem;
+  left: 0;
   width: 100%;
   font-size: 6rem;
   font-weight: 100;
