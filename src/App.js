@@ -1,96 +1,52 @@
 import { useReducer } from "react";
-import TodoForm from "./Todos/TodoForm";
-import TodoList from "./Todos/TodoList";
-import TodoFooter from "./Todos/TodoFooter";
+import { data, reducer } from "./reducer/reducer";
+import TodoForm from "./components/Form/TodoForm";
+import TodoList from "./components/Items/TodoList";
+import TodoFooter from "./components/Footer/TodoFooter";
 import "./App.css";
 
-function reducer(state, action) {
-  if (action.type === "add") {
-    return [
-      ...state,
-      {
-        id: Math.random(),
-        text: action.payload.text,
-        isCompleted: false,
-      },
-    ];
-  } else if (action.type === "delete") {
-    return state.filter((t) => t.id !== action.payload.id);
-  } else if (action.type === "clear-completed") {
-    return state.filter((todo) => !todo.isCompleted);
-  } else if (action.type === "update") {
-    return state.map((todo) => {
-      if (todo.id === action.payload.updatedTodo.id) {
-        return action.payload.updatedTodo;
-      }
-      return todo;
-    });
-  }
-}
+export const TodoApp = () => {
+  const [todos, dispatch] = useReducer(reducer, data);
 
-function App() {
-  const [todos, dispatch] = useReducer(reducer, [
-    {
-      id: Math.random(),
-      text: "Learn React",
-      isCompleted: false,
-    },
-    {
-      id: Math.random(),
-      text: "Learn CSS",
-      isCompleted: false,
-    },
-    {
-      id: Math.random(),
-      text: "Learn JS",
-      isCompleted: false,
-    },
-  ]);
+  const addText = (text) => {
+    dispatch({
+      type: "add",
+      payload: {
+        text: text,
+      },
+    });
+  };
+
+  const deleteText = (todo) => {
+    dispatch({
+      type: "delete",
+      payload: {
+        id: todo.id,
+      },
+    });
+  };
+
+  const changeText = (newTodo) => {
+    dispatch({
+      type: "update",
+      payload: {
+        updatedTodo: newTodo,
+      },
+    });
+  };
+
+  const clearCompleted = () => {
+    dispatch({
+      type: "clear-completed",
+    });
+  };
 
   return (
     <div className="App">
-      <section>
-        <h1 className="todoAppTitle">Todos</h1>
-      </section>
-      <TodoForm
-        onAdd={(text) => {
-          dispatch({
-            type: "add",
-            payload: {
-              text: text,
-            },
-          });
-        }}
-      />
-      <TodoList
-        todos={todos}
-        onDelete={(todo) => {
-          dispatch({
-            type: "delete",
-            payload: {
-              id: todo.id,
-            },
-          });
-        }}
-        onChange={(newTodo) => {
-          dispatch({
-            type: "update",
-            payload: {
-              updatedTodo: newTodo,
-            },
-          });
-        }}
-      />
-      <TodoFooter
-        todos={todos}
-        onClearCompleted={() => {
-          dispatch({
-            type: "clear-completed",
-          });
-        }}
-      />
+      <h1 className="todoTitle">Todos</h1>
+      <TodoForm onAdd={addText} />
+      <TodoList todos={todos} onDelete={deleteText} onChange={changeText} />
+      <TodoFooter todos={todos} onClearCompleted={clearCompleted} />
     </div>
   );
-}
-
-export default App;
+};
